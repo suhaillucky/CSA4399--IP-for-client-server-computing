@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Vehicle</title>
+    <style>
+        body {
+            background: url('bc.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #333;
+        }
+        nav {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        nav a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+            padding: 10px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h2 {
+            margin: 20px;
+        }
+        select, input {
+            padding: 10px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin: 0 auto 20px;
+            display: block;
+        }
+        .box {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin: 0 auto;
+            width: 80%;
+            max-width: 1200px;
+        }
+        #models {
+            text-align: center;
+        }
+        #vehicleDetails {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #confirmSection {
+            text-align: center;
+            display: none;
+        }
+        #confirmSection button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #confirmSection button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <nav>
+            <a href="vehicleselection.html">Select Vehicle</a>
+            <a href="dateandtimeselection.html">Date & Time Selection</a>
+            <a href="userprofile.html">User Profile</a>
+            <a href="payment.html">Payment</a>
+            <a href="cancellation.html">Cancel Booking</a>
+            <a href="contactus.html">Contact Us</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="logout.html">logout</a>
+        </nav>
+        <h2>Select Vehicle Type</h2>
+        <select id="vehicleType" onchange="showModels()">
+            <option value="">Select Type</option>
+            <option value="car">Car</option>
+            <option value="bike">Bike</option>
+        </select>
+        
+        <div id="models"></div>
+        <div id="vehicleDetails"></div>
+        <div id="confirmSection">
+            <button onclick="confirmVehicle()">Confirm Vehicle</button>
+        </div>
+    </div>
+
+    <script>
+        const vehicles = {
+            car: [
+                { name: 'maruthi swift', price: 1000, specs: 'Automatic, 5 seats, 20km/l', image: 'ms.jpg' },
+                { name: 'Nano', price: 800, specs: 'Manual, 4 seats, 18km/l', image: 'na.jpg' },
+                { name: 'Tata Punch', price: 1500, specs: 'Automatic, 7 seats, 15km/l', image: 'tp.jpg' },
+                { name: 'Inova', price: 2000, specs: 'Automatic, 7 seats, 20km/l', image: 'in.jpg' },
+                { name: 'Verna', price: 1200, specs: 'Manual, 4 seats, 18km/l', image: 'vr.jpg' }
+            ],
+        
+            bike: [
+                { name: 'Passion', price: 500, specs: '150cc, 35km/l', image: 'ps.jpg' },
+                { name: 'Hero Honda', price: 700, specs: '200cc, 30km/l', image: 'sp.jpg' },
+                { name: 'Shine', price: 900, specs: '250cc, 25km/l', image: 'sh.jpg' },
+                { name: 'Duke', price: 1500, specs: '150cc, 35km/l', image: 'dk.jpg' },
+                { name: 'Royal Enfield', price: 2000, specs: '300cc, 30km/l', image: 'bl.jpg' }
+            ]
+        };
+
+        let selectedVehicle = null;
+
+        function showModels() {
+            const vehicleType = document.getElementById('vehicleType').value;
+            const modelsDiv = document.getElementById('models');
+            let modelsHTML = '';
+
+            if (vehicleType) {
+                vehicles[vehicleType].forEach((model, index) => {
+                    modelsHTML += `
+                        <div style="margin-bottom: 20px;">
+                            <input type="radio" name="vehicleModel" value="${index}" onchange="showDetails('${vehicleType}', ${index})">
+                            <img src="${model.image}" alt="${model.name}" style="width: 200px; height: auto; display: block; margin: 10px auto;">
+                            <p><b>${model.name}</b>: ${model.specs} - ₹${model.price}/day</p>
+                        </div>
+                    `;
+                });
+            }
+            modelsDiv.innerHTML = modelsHTML;
+        }
+
+        function showDetails(vehicleType, index) {
+            const vehicleDetails = document.getElementById('vehicleDetails');
+            selectedVehicle = vehicles[vehicleType][index];
+            vehicleDetails.innerHTML = `
+                <h3>${selectedVehicle.name}</h3>
+                <img src="${selectedVehicle.image}" alt="${selectedVehicle.name}" style="width: 300px; height: auto; display: block; margin: 10px auto;">
+                <p>Price: ₹${selectedVehicle.price}/day</p>
+                <p>Specifications: ${selectedVehicle.specs}</p>
+            `;
+            document.getElementById('confirmSection').style.display = 'block';
+        }
+
+        function confirmVehicle() {
+            if (selectedVehicle) {
+                localStorage.setItem('selectedVehicle', JSON.stringify(selectedVehicle));
+                alert(`You have selected ${selectedVehicle.name} with a price of ₹${selectedVehicle.price}/day.`);
+                window.location.href = 'date & time selection.html';
+            } else {
+                alert('Please select a vehicle.');
+            }
+        }
+    </script>
+</body>
+</html>

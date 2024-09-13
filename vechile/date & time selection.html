@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Date and Time</title>
+    <style>
+        body {
+            background: url('dt.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 10px; /* Reduced padding */
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px auto; /* Reduced margin */
+            width: 70%; /* Reduced width */
+        }
+        nav a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 16px; /* Reduced font size */
+            margin: 0 10px; /* Reduced horizontal spacing */
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h2 {
+            text-align: center;
+            font-size: 28px; /* Reduced font size */
+            margin-bottom: 20px; /* Reduced margin */
+            color: white;
+        }
+        form {
+            width: 350px; /* Reduced width */
+            margin: 0 auto;
+            background-color: white;
+            padding: 15px; /* Reduced padding */
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        label, input {
+            display: block;
+            width: 100%;
+            margin-bottom: 12px; /* Reduced spacing */
+            font-size: 16px; /* Reduced font size */
+        }
+        input {
+            padding: 6px; /* Reduced padding */
+            font-size: 14px; /* Reduced font size */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 8px; /* Reduced padding */
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px; /* Reduced font size */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="vehicleselection.html">Select Vehicle</a>
+        <a href="date and time selection.html">Date & Time Selection</a>
+        <a href="user profile.html">User Profile</a>
+        <a href="payment.html">Payment</a>
+        <a href="cancellation.html">Cancel Booking</a>
+        <a href="contactus.html">Contact Us</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="logout.html">logout</a>
+    </nav>
+
+    <h2>Select Date and Time</h2>
+    
+    <form id="dateTimeForm">
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" required>
+
+        <label for="startTime">Start Time:</label>
+        <input type="time" id="startTime" required>
+
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" required>
+
+        <label for="endTime">End Time:</label>
+        <input type="time" id="endTime" required>
+
+        <button type="submit">Confirm Dates</button>
+    </form>
+
+    <script>
+        document.getElementById('dateTimeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const startDate = document.getElementById('startDate').value;
+            const startTime = document.getElementById('startTime').value;
+            const endDate = document.getElementById('endDate').value;
+            const endTime = document.getElementById('endTime').value;
+
+            if (startDate && startTime && endDate && endTime) {
+                alert('Dates and times confirmed!');
+                window.location.href = 'user profile.html';
+            } else {
+                alert('Please fill out all fields.');
+            }
+        });
+    </script>
+</body>
+</html>

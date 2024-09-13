@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Details</title>
+    <style>
+        body {
+            background: url('up.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            width: 80%;
+        }
+        nav a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 14px; /* Decreased the font size */
+            margin: 0 10px;   /* Reduced margin between links */
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h2 {
+            text-align: center;
+            font-size: 30px;
+            color: white;
+            margin-top: 30px;
+        }
+        form {
+            width: 300px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        label, input {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        input {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="vehicleselection.html">Select Vehicle</a>
+        <a href="dateandtimeselection.html">Date & Time Selection</a>
+        <a href="userprofile.html">User Profile</a>
+        <a href="payment.html">Payment</a>
+        <a href="cancellation.html">Cancel Booking</a>
+        <a href="contactus.html">Contact Us</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="logout.html">logout</a>
+    </nav>
+
+    <h2>Enter Your Profile Details</h2>
+    
+    <form id="profileForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" required>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" required>
+
+        <label for="license">License Number:</label>
+        <input type="text" id="license" required>
+
+        <button type="submit">Confirm Profile</button>
+    </form>
+
+    <script>
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const license = document.getElementById('license').value;
+
+            if (name && phone && address && license) {
+                alert('Profile confirmed!');
+                window.location.href = 'payment.html';
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+    </script>
+
+</body>
+</html>
